@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Row, Col, Form, Input, InputNumber, Upload, Button, message } from 'antd';
+import Cookies from 'js-cookie';
 import { UploadOutlined } from '@ant-design/icons';
 import Classes from '../styles/car-form.module.css';
 
 export default function CarForm() {
     const [loading, setLoading] = useState(false);
     const [fileList, setFileList] = useState([]);
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (!token) {
+            message.warning('Please log in to access this page.');
+            router.push('/');
+        }
+    }, [router]);
 
     const handleUpload = ({ fileList: newFileList }) => {
         setFileList(newFileList.slice(0, 10));
@@ -21,7 +32,6 @@ export default function CarForm() {
 
         const formData = {
             ...restValues,
-            user: '6755ee70161495befd86a5e2',
             images: fileList.map(file => file.thumbUrl)
         };
 
@@ -32,6 +42,7 @@ export default function CarForm() {
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json',
+                    Authorization: `Bearer ${Cookies.get('token')}`
                 },
                 body: JSON.stringify(formData)
             });
