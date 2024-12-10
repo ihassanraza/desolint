@@ -28,7 +28,7 @@ export default function CarForm() {
         try {
             setLoading(true);
 
-            const response = await fetch("http://localhost:5000/api/cars", {
+            const response = await fetch("https://desolint-backend-alpha.vercel.app/api/cars", {
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json',
