@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Row, Col, Form, Input, Button, message } from 'antd';
 import Cookies from 'js-cookie';
@@ -7,6 +7,13 @@ import Classes from '../styles/login-form.module.css';
 export default function LoginForm() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            router.push('/cars');
+        }
+    }, [router]);
 
     const onFinish = async (values) => {
         setLoading(true);
