@@ -1,0 +1,21 @@
+.row {
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.button {
+    height: 40px;
+}
